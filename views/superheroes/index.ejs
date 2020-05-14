@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') %>
+    </head>
+
+    <body>
+        <div class="row padding">
+            <h3>Superheroes</h3>
+
+            <% superhero.forEach((superhero, index) => { %>
+                <h5>
+                    <a href="/superheroes/<%= index %>"><%= superhero.name %></a>
+                </h5>
+            <% }) %>
+        </div>
+    </body>
+</html>
