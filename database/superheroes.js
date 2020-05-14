@@ -1,29 +1,29 @@
-const { superhero } = require('../models');
 
-const superheroes = [
-    {
-        name: 'Lex Luthor', 
-        powers: ['super brain']
-    },
-    {
-        name: 'Ares', 
-        powers: ['shape shifting', 'teleporting']
-    },
-    {
-        name: 'Killmonger', 
-        powers: ['ability to fit in Black Panther\'s suit', 'internet agreement that he looks badass']
-    }
-];
+// const { superhero } = require('../models');
+let request = require ('request');
+let superheroes =[];
 
-const buildSuperhero =({ name, powers }) =>{
-    return new superhero(name, powers);
-};
+for (let i=1;i<200;i++){
+    const url = `https://www.superheroapi.com/api.php/2785821668194196/${i}`;
+    request({
+        url: url,
+        json: true
+    }, function (error, response, data) {
+        if (!error && response.statusCode === 200) {
+            superheroes.push(data);
+        }
+    });
+}
+
+// const buildSuperhero =({ name, powers }) =>{
+//     return new superhero(name, powers);
+// };
 
 module.exports = {
     getAll () {
-        return superheroes.map(buildSuperhero);
+        return superheroes;
     },
     getByIndex (index) {
-        return buildSuperhero(superheroes[index]);
+        return superheroes[index];
     }
 };
